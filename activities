@@ -1,0 +1,32 @@
+Adaptative techniques for MOEA/D 
+
+1. Implementation of MOEA/D with:
+    1. Priority functions
+    2. Parameter adaptation
+    3. weight vector adjustment
+
+2. Cronogram
+    1. Implementing MOEA/D
+        1. Decomposition method - SLD - Yifan - First week of april
+        2. Population initialization - random - Kobayashi - First week of april
+        3. Scalar aggregation function - WT - Kobayashi - First week of april
+        4. Scaling - Yuri - First week of april
+        5. Neighborhood - Kobayashi - First week of april
+        6. Variation operators - levy, pol. Mutation - Yifan - First week of april
+        7. update reference point - - Yifan - First week of april
+        7. Update strategy - restricted - Yuri - First week of april
+        8. Constraint handling - no constraints yet
+        9. Termination criteria - number of evolutions - Yuri - First week of april
+    2. Polishing the code - all - Second week of april
+    3. Implementing Priority functions - Yuri - Forth and fifth week of april
+    4. Implementing weight vector adjustment - Kobayashi - Forth and fifth week of april
+    5. Implementing parameter adaptation - He - Forth and fifth week of april
+    6. Experiments in benchmark functions and results - First and second week of May
+    7. Explain how and why 3, 4 and 5 works - second week of May
+    8. Submit paper for Arxiv with the summary of the project results - third week of May
+    9. Create documentation - third week of May
+
+3. We should learn/study the GitHub’s of Nevergrad and IOHprofiler
+  1. https://github.com/facebookresearch/nevergrad/
+
+
