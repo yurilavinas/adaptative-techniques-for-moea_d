@@ -1,2 +1,2 @@
-# adaptative-techniques-for-moea_d
-Code of MOEA/D with adaptive techniques studied by the LABEC laboratory at the University of Tsukuba 
+# moead-levy-python
+A simple python script implmentation of MOEA/D injected with Levy Flight mutation
