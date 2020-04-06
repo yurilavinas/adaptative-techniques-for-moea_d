@@ -1,13 +1,13 @@
-prefix: 'tmp' 
+prefix: 'p_functions' 
 prob_name: 'sch'
 n_obj: 2
 n_var: 1
 xl: -100
 xu: 100
 sld_n_part: 249
-n_eval: 10000
+n_eval: 100000
 T: 20
-sigma: 0.9
+delta: 0.9
 nr: 2
 alpha: 1.e-05
 beta: 0.3

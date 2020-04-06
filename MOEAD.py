@@ -11,6 +11,7 @@ from Population import init_pop, eval_pop
 from ReferencePoint import init_ref_point, update_ref_point
 from Mutation import lf_mutation, poly_mutation, fix_bound
 from Decomposition import tchebycheff
+from PriorityFunctions import fixed_priority_values
 
 
 ###################
@@ -40,14 +41,14 @@ n_var = params['n_var']                                             # set number
 xl = params['xl']                                                   # set boundary of variables
 xu = params['xu']
 
-n_part = params['n_part']                                           # set number of partitions
+sld_n_part = params['sld_n_part']                                           # set number of partitions
 
 n_eval = params['n_eval']                                           # set maximum number of evaluation
-n_pop = int( comb(n_obj + n_part - 1, n_obj - 1) )                  # compute population size
+n_pop = int( comb(n_obj + sld_n_part - 1, n_obj - 1) )                  # compute population size
 n_gen = n_eval // n_pop                                             # compute maximum generation
 
-n_neb = params['n_neb']                                             # set neighbor size
-sigma = params['sigma']                                             # set probability to select parent from neighbor
+T = params['T']                                                     # set neighbor size
+delta = params['delta']                                             # set probability to select parent from neighbor
 nr = params['nr']                                                   # set maximum update counts for one offspring
 
 alpha = params['alpha']                                             # set scaling factor of levy flight mutation
@@ -62,11 +63,13 @@ os.makedirs(f'./{prefix}', exist_ok=True)                           # create a f
 os.makedirs(f'./{prefix}/history/', exist_ok=True)
 os.makedirs(f'./{prefix}/history/{args.seed}', exist_ok=True)
 
-W = das_dennis(n_part, n_obj)                                       # generate a set of weight vectors
-B = determine_neighbor(W, n_neb)                                    # determine neighbor
+W = das_dennis(sld_n_part, n_obj)                                       # generate a set of weight vectors
+B = determine_neighbor(W, T)                                        # determine neighbor
 X = init_pop(n_pop, n_var, xl, xu)                                  # initialize a population
 F = eval_pop(X, f)                                                  # evaluate fitness
 z = init_ref_point(F)                                               # determine a reference point
+
+priority_values = fixed_priority_values(n_pop)
 
 for c_gen in range(1, n_gen):                                       # star main loop
 
@@ -75,34 +78,37 @@ for c_gen in range(1, n_gen):                                       # star main 
 
     for i in np.random.permutation(n_pop):                          # traverse the population
 
-        xi, fi = X[i, :], F[i, :]                                   # get current individual
+        if (priority_values[i] >= np.random.uniform()):
+            xi, fi = X[i, :], F[i, :]                                   # get current individual and its fitness value
 
-        if random.random() < sigma:                                 # determine selection pool by probability
-            pool = B[i, :]                                          # neighbor as the pool
-        else:
-            pool = np.arange(n_pop)                                 # population as the pool
+            if random.random() < delta:                                 # determine selection pool by probability
+                pool = B[i, :]                                          # neighbor as the pool
+            else:
+                pool = np.arange(n_pop)                                 # population as the pool
 
-        j = np.random.choice(pool)                                  # select a random individual from pool
-        xj, fj = X[j, :], F[j, :]
+            j = np.random.choice(pool)                                  # select a random individual from pool
+            xj, fj = X[j, :], F[j, :]
 
-        xi_ = fix_bound( lf_mutation(xi, xj, alpha, beta), xl, xu ) # levy flight mutation
-        xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu ) # polynomial mutation
-        fi_ = f(xi_)                                                # evaluate offspring
+            xi_ = fix_bound( lf_mutation(xi, xj, alpha, beta), xl, xu ) # levy flight mutation
+            xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu ) # polynomial mutation
+            fi_ = f(xi_)                                                # evaluate offspring
 
-        z = update_ref_point(z, fi_)                                # update reference point
+            z = update_ref_point(z, fi_)                                # update reference point
 
-        nc = 0                                                      # initialize the update counter
-        for k in np.random.permutation(len(pool)):                  # traverse the selection pool
+            nc = 0                                                      # initialize the update counter
+            for k in np.random.permutation(len(pool)):                  # traverse the selection pool
 
-            fk = F[k, :]                                            # get k-th individual fitness
-            wk = W[k, :]                                            # get k-th weight vector
+                fk = F[k, :]                                            # get k-th individual fitness
+                wk = W[k, :]                                            # get k-th weight vector
 
-            if tchebycheff(fi_, wk, z) <= tchebycheff(fk, wk, z):   # compare tchebycheff cost of offspring and parent
-                X[k] = xi_                                          # update parent
-                F[k] = fi_
-                nc += 1                                             # cumulate the counter
+                if tchebycheff(fi_, wk, z) <= tchebycheff(fk, wk, z):   # compare tchebycheff cost of offspring and parent
+                    X[k] = xi_                                          # update parent
+                    F[k] = fi_
+                    nc += 1                                             # cumulate the counter
 
-            if nc >= nr: break                                      # break if counter arrive the upper limit
+                if nc >= nr: break                                      # break if counter arrive the upper limit
+
+    priority_values = fixed_priority_values(n_pop)
 
 result = np.hstack([F, X])                                          # record objective values and decision variables
 np.savetxt(f'./{prefix}/history/{args.seed}/{n_gen}.csv', result)
