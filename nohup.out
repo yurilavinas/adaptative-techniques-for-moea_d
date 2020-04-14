@@ -1,0 +1,432 @@
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 105, in <module>
+    mask_priority = get_mask(n_pop, number_solutions, priority_values, idx_boundary) # mask for RA
+  File "/Users/yurilavinas/adaptative-techniques-for-moea_d/PriorityFunctions.py", line 79, in get_mask
+    mask_priority = np.zeros(n_pop)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 105, in <module>
+    mask_priority = get_mask(n_pop, number_solutions, priority_values, idx_boundary) # mask for RA
+  File "/Users/yurilavinas/adaptative-techniques-for-moea_d/PriorityFunctions.py", line 78, in get_mask
+    idx_select_solutions = np.random.choice(a = no_boundaries,size = number_solutions, replace = False, p = priority_values)  
+  File "mtrand.pyx", line 1150, in mtrand.RandomState.choice
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 2585, in prod
+    initial=initial)
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/fromnumeric.py", line 83, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 3, in <module>
+    import yaml
+  File "/anaconda3/lib/python3.6/site-packages/yaml/__init__.py", line 8, in <module>
+    from .loader import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/loader.py", line 8, in <module>
+    from .constructor import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/constructor.py", line 8, in <module>
+    import collections, datetime, base64, binascii, re, sys, types
+  File "/anaconda3/lib/python3.6/datetime.py", line 8, in <module>
+    import math as _math
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 16, in <module>
+    from . import multiarray
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 951, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 894, in _find_spec
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 14, in <module>
+    from . import py3k
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/py3k.py", line 14, in <module>
+    from pathlib import Path
+  File "/anaconda3/lib/python3.6/pathlib.py", line 14, in <module>
+    from urllib.parse import quote_from_bytes as urlquote_from_bytes
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 951, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 894, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1157, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1129, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1261, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1231, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 556, in spec_from_file_location
+  File "<frozen importlib._bootstrap>", line 371, in __init__
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 658, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+  File "<frozen importlib._bootstrap>", line 556, in _init_module_attrs
+  File "<frozen importlib._bootstrap>", line 409, in cached
+  File "<frozen importlib._bootstrap_external>", line 364, in _get_cached
+  File "<frozen importlib._bootstrap_external>", line 305, in cache_from_source
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 14, in <module>
+    from . import py3k
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/py3k.py", line 14, in <module>
+    from pathlib import Path
+  File "/anaconda3/lib/python3.6/pathlib.py", line 4, in <module>
+    import ntpath
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 14, in <module>
+    from . import py3k
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/py3k.py", line 14, in <module>
+    from pathlib import Path
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap_external>", line 1096, in _path_importer_cache
+KeyError: '/anaconda3/lib/python3.6/urllib'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap_external>", line 1074, in _path_hooks
+zipimport.ZipImportError: not a Zip file
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 14, in <module>
+    from . import py3k
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/py3k.py", line 14, in <module>
+    from pathlib import Path
+  File "/anaconda3/lib/python3.6/pathlib.py", line 14, in <module>
+    from urllib.parse import quote_from_bytes as urlquote_from_bytes
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 951, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 894, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1157, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1126, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1098, in _path_importer_cache
+  File "<frozen importlib._bootstrap_external>", line 1074, in _path_hooks
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 34, in <module>
+    from . import umath
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 14, in <module>
+    from . import py3k
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/py3k.py", line 14, in <module>
+    from pathlib import Path
+  File "/anaconda3/lib/python3.6/pathlib.py", line 4, in <module>
+    import ntpath
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 658, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+  File "<frozen importlib._bootstrap>", line 556, in _init_module_attrs
+  File "<frozen importlib._bootstrap>", line 409, in cached
+  File "<frozen importlib._bootstrap_external>", line 362, in _get_cached
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 3, in <module>
+    import yaml
+  File "/anaconda3/lib/python3.6/site-packages/yaml/__init__.py", line 9, in <module>
+    from .dumper import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/dumper.py", line 6, in <module>
+    from .representer import *
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 658, in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 577, in module_from_spec
+  File "<frozen importlib._bootstrap>", line 556, in _init_module_attrs
+  File "<frozen importlib._bootstrap>", line 409, in cached
+  File "<frozen importlib._bootstrap_external>", line 362, in _get_cached
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 3, in <module>
+    import yaml
+  File "/anaconda3/lib/python3.6/site-packages/yaml/__init__.py", line 8, in <module>
+    from .loader import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/loader.py", line 8, in <module>
+    from .constructor import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/constructor.py", line 8, in <module>
+    import collections, datetime, base64, binascii, re, sys, types
+  File "/anaconda3/lib/python3.6/base64.py", line 11, in <module>
+    import binascii
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 3, in <module>
+    import yaml
+  File "/anaconda3/lib/python3.6/site-packages/yaml/__init__.py", line 8, in <module>
+    from .loader import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/loader.py", line 5, in <module>
+    from .scanner import *
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 771, in get_code
+  File "<frozen importlib._bootstrap_external>", line 430, in _validate_bytecode_header
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 3, in <module>
+    import yaml
+  File "/anaconda3/lib/python3.6/site-packages/yaml/__init__.py", line 8, in <module>
+    from .loader import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/loader.py", line 9, in <module>
+    from .resolver import *
+  File "/anaconda3/lib/python3.6/site-packages/yaml/resolver.py", line 213, in <module>
+    (?:[ \t]*(?:Z|[-+][0-9][0-9]?(?::[0-9][0-9])?))?)$''', re.X),
+  File "/anaconda3/lib/python3.6/re.py", line 233, in compile
+    return _compile(pattern, flags)
+  File "/anaconda3/lib/python3.6/re.py", line 301, in _compile
+    p = sre_compile.compile(pattern, flags)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 566, in compile
+    code = _code(p, flags)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 551, in _code
+    _compile(code, p.data, flags)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 146, in _compile
+    _compile(code, p, (flags | add_flags) & ~del_flags)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 187, in _compile
+    _compile(code, av, flags)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 126, in _compile
+    _compile(code, av[2], flags)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 108, in _compile
+    _compile_charset(av, flags, code, fixup, fixes)
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 226, in _compile_charset
+    for op, av in _optimize_charset(charset, fixup, fixes):
+  File "/anaconda3/lib/python3.6/sre_compile.py", line 278, in _optimize_charset
+    for i in r:
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 106, in <module>
+    """
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 14, in <module>
+    from . import py3k
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/py3k.py", line 14, in <module>
+    from pathlib import Path
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 771, in get_code
+  File "<frozen importlib._bootstrap_external>", line 482, in _validate_bytecode_header
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "MOEAD_collab.py", line 5, in <module>
+    import numpy as np
+  File "/anaconda3/lib/python3.6/site-packages/numpy/__init__.py", line 142, in <module>
+    from . import add_newdocs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/add_newdocs.py", line 13, in <module>
+    from numpy.lib import add_newdoc
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/__init__.py", line 8, in <module>
+    from .type_check import *
+  File "/anaconda3/lib/python3.6/site-packages/numpy/lib/type_check.py", line 11, in <module>
+    import numpy.core.numeric as _nx
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/__init__.py", line 35, in <module>
+    from . import _internal  # for freeze programs
+  File "/anaconda3/lib/python3.6/site-packages/numpy/core/_internal.py", line 12, in <module>
+    from numpy.compat import basestring, unicode
+  File "/anaconda3/lib/python3.6/site-packages/numpy/compat/__init__.py", line 13, in <module>
+    from . import _inspect
+  File "<frozen importlib._bootstrap>", line 971, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 955, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 665, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 674, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 779, in get_code
+  File "<frozen importlib._bootstrap_external>", line 487, in _compile_bytecode
+KeyboardInterrupt
+  File "MOEAD_collab.py", line 51
+    problem = get_problem("dtlz7")
+            ^
+SyntaxError: invalid syntax
+  File "MOEAD_collab.py", line 51
+    problem = get_problem("dtlz7")
+            ^
+SyntaxError: invalid syntax

@@ -90,3 +90,34 @@ def gutowski(alpha, beta, n_var):
 def fix_bound(x, xl, xu):
     x = np.clip(x, xl, xu)
     return x
+
+def de_mutation(xi, X, n_pop, current_candidate, F = 0.5):
+    """
+    Implement differential evolution mutation
+
+    parameter
+    ----------
+    xi_: 1D-Array
+      current individual
+    n_pop: population set size
+    F: float
+      parameter (0, 1)
+
+    ----------
+    return
+    1D-Array
+      an offspring
+    """
+    if F <= 0 or F > 1:
+        print("Error: Differential Evolution algorithm requires a F between 0 to 1.")
+        return None
+    all_solutions = np.arange(0, n_pop) 
+    exclusive_solutions = all_solutions[np.arange(len(all_solutions))!=(current_candidate-1)]
+    idxs = np.random.permutation(exclusive_solutions)[0:2]
+    x = xi + F*(X[idxs[0], :]-X[idxs[1], :])
+    return x
+
+
+
+
+

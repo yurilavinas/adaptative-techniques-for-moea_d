@@ -21,7 +21,7 @@ def init_pop(n_pop, n_var, xl, xu):
     X = np.random.uniform(xl, xu, (n_pop, n_var))
     return X
 
-def eval_pop(X, f):
+def eval_pop(X, problem):
     """
     Evaluate a population with the given objectives
 
@@ -29,7 +29,7 @@ def eval_pop(X, f):
     -----------
     X: 2D-Array
       population matrix where each row is an individual
-    f: method
+    problem: method
       objective function which returns fitness values of a input individual
     
     return
@@ -38,6 +38,5 @@ def eval_pop(X, f):
       fitness value matrix where each row is the fitness values of an individual
     """
     F = []
-    for x in X:
-        F.append(f(x))
+    F= problem.evaluate(X)
     return np.array(F)
