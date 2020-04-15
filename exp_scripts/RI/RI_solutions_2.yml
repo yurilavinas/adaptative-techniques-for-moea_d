@@ -6,7 +6,7 @@ xl: 0
 xu: 1
 n_pop: 500
 n_eval: 10000000
-T: 10
+T: 100
 delta: 0.9
 nr: 2
 etam : 20

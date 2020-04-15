@@ -18,9 +18,8 @@ from PriorityFunctions import priority, get_mask
 ###################
 #  MOP to solve   #
 ###################
-# from pymoo.algorithms.moead import MOEAD
-from pymoo.factory import get_problem, get_visualization, get_reference_directions
-from pymoo.optimize import minimize
+from pymoo.factory import get_problem
+from platypus.problems import UF9
 ###################
 # parse arguments #
 ###################
@@ -46,11 +45,15 @@ n_var = params['n_var']                                             # set number
 xl = params['xl']                                                   # set boundary of variables
 xu = params['xu']
 
-problem = get_problem(params['prob_name'])							# set optimization problem
-problem.n_var = n_var
-problem.n_obj = n_obj
-problem.xu = np.repeat(xu, n_var)
-problem.xl = np.repeat(xl, n_var)
+prob_name = params['prob_name']
+if (prob_name == "dtlz7"): 
+    problem = get_problem(prob_name)							# set optimization problem
+    problem.n_var = n_var
+    problem.n_obj = n_obj
+    problem.xu = np.repeat(xu, n_var)
+    problem.xl = np.repeat(xl, n_var)
+else:
+    problem = UF9
 
 
 
@@ -75,7 +78,8 @@ number_solutions = params['number_solutions']                       # number of 
 
 os.makedirs(f'./{output}', exist_ok=True)                           # create a folder to include running results
 os.makedirs(f'./{output}/history/', exist_ok=True)
-os.makedirs(f'./{output}/history/{args.seed}', exist_ok=True)
+os.makedirs(f'./{output}/final/', exist_ok=True)
+os.makedirs(f'./{output}/history/{prob_name}_{args.seed}', exist_ok=True)
 
 W = np.zeros(shape=(n_pop,n_obj))
 with open("/Users/yurilavinas/MOEADr/SOBOL-"+str(n_obj)+"objs-500wei.ws") as file_in:
@@ -98,13 +102,15 @@ X = init_pop(n_pop, n_var, xl, xu)                                  # initialize
 
 
 Y = eval_pop(X, problem)                                                  # evaluate fitness
+
 z = init_ref_point(Y)                                               # determine a reference point
 
 n_fe = n_pop
 
 if(priority_function == "fix_random"):
-	dt_X = X
-	priority_values = priority(n_pop, X, dt_X, Y, dt_Y, priority_function, fix_value) # generate an array of values for resource allocation based on priority_function named function
+    dt_X = X
+    dt_Y = Y
+    priority_values = priority(n_pop, X, dt_X, Y, dt_Y, priority_function, fix_value) # generate an array of values for resource allocation based on priority_function named function
 else:
     priority_values = np.zeros(n_pop) + 1	
 bigZ = np.zeros(n_pop)
@@ -113,12 +119,13 @@ bigZ = np.zeros(n_pop)
 c_gen = 1
 while n_fe < n_eval:												# start main loop
     result = np.hstack([Y])                                      # record objective values and decision variables
-    np.savetxt(f'./{output}/history/{args.seed}/{c_gen}_paretos.csv', result)
+    np.savetxt(f'./{output}/history/{prob_name}_{args.seed}/{c_gen}_paretos.csv', result)
 
     info_gen = np.hstack([n_fe, c_gen])                                      # record information (n_fe and c_gen) about the current generation
-    np.savetxt(f'./{output}/history/{args.seed}/{c_gen}_info_gen.csv', info_gen)
+    np.savetxt(f'./{output}/history/{prob_name}_{args.seed}/{c_gen}_info_gen.csv', info_gen)
 
     dt_X = X.copy()
+    dt_Y = Y.copy()
     dt_bigZ = bigZ.copy()
     mask_priority = get_mask(n_pop, number_solutions, priority_values, idx_boundary) # mask for RA
 
@@ -144,16 +151,18 @@ while n_fe < n_eval:												# start main loop
 
             z = update_ref_point(z, fi_)                                # update reference point
 
+            bigZ[i] = tchebycheff(fi_, W[i, :], z)
+
             nc = 0                                                      # initialize the update counter
             for k in np.random.permutation(len(pool)):                  # traverse the selection pool
 
                 fk = Y[k, :]                                            # get k-th individual fitness
                 wk = W[k, :]                                            # get k-th weight vector
 
-                bigZ[i] = tchebycheff(fi_, wk, z)
-                dt_bigZ[i] = tchebycheff(fk, wk, z)
+                tch_ = tchebycheff(fi_, wk, z)                          # compute tchebycheff cost of offspring
+                tchk = tchebycheff(fk, wk, z)                           # compute tchebycheff cost of parent
 
-                if bigZ[i] <= dt_bigZ[i]:   # compare tchebycheff cost of offspring and parent
+                if tch_ <= tchk:                                        # compare tchebycheff cost of offspring and parent
                     X[k] = xi_                                          # update parent
                     Y[k] = fi_
                     nc += 1                                             # cumulate the counter
@@ -162,11 +171,19 @@ while n_fe < n_eval:												# start main loop
     		
     c_gen += 1
     priority_values = priority(n_pop, X, dt_X, bigZ, dt_bigZ, priority_function, fix_value) # generate an array of values for resource allocation based on priority_function named function
-
-result = np.hstack([Y])                                          # record objective values and decision variables
-
-np.savetxt(f'./{output}/history/{args.seed}/{c_gen}_paretos.csv', result)
-np.savetxt(f'./{output}/{args.seed}_final.csv', result)
+    dt_bigZ = bigZ.copy()
 
 info_gen = np.hstack([n_fe, c_gen])                                      # record information (n_fe and c_gen) about the current generation
-np.savetxt(f'./{output}/history/{args.seed}/{c_gen}_info_gen.csv', info_gen)
+result = np.hstack([Y])                                          # record objective values and decision variables
+
+np.savetxt(f'./{output}/history/{prob_name}_{args.seed}/{c_gen}_info_gen.csv', info_gen)
+np.savetxt(f'./{output}/history/{prob_name}_{args.seed}/{c_gen}_paretos.csv', result)
+
+np.savetxt(f'./{output}/final/{prob_name}_{args.seed}_paretos.csv', result)
+np.savetxt(f'./{output}/final/{prob_name}_{args.seed}_info_gen.csv', info_gen)
+
+
+
+
+
+
