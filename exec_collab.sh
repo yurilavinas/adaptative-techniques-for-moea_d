@@ -1,8 +1,8 @@
 # Usage
 # python MOEAD.py [parameter yml file] [random seed]
  
-nohup random.sh &
+nohup sh random.sh &
 
-nohup ds_norm.sh &
+nohup sh ds_norm.sh &
 
-nohup RI.sh & 
+nohup sh RI.sh & 
