@@ -8,7 +8,7 @@ import itertools
 
 from Factory import set_problem
 from WeightVector import das_dennis, determine_neighbor
-from Population import init_pop, eval_pop
+from Population import init_pop, eval_pop, eval_all_solutions
 from ReferencePoint import init_ref_point, update_ref_point
 from Mutation import lf_mutation, poly_mutation, fix_bound, de_mutation
 from Decomposition import tchebycheff
@@ -53,7 +53,8 @@ if (prob_name == "dtlz7"):
     problem.xu = np.repeat(xu, n_var)
     problem.xl = np.repeat(xl, n_var)
 else:
-    problem = UF9
+    problem = set_problem(prob_name)                                     # set optimization problem
+    
 
 
 
@@ -82,7 +83,7 @@ os.makedirs(f'./{output}/final/', exist_ok=True)
 os.makedirs(f'./{output}/history/{prob_name}_{args.seed}', exist_ok=True)
 
 W = np.zeros(shape=(n_pop,n_obj))
-with open("/Users/yurilavinas/MOEADr/SOBOL-"+str(n_obj)+"objs-500wei.ws") as file_in:
+with open("/home/yclavinas/MOEADr/SOBOL-"+str(n_obj)+"objs-500wei.ws") as file_in:
     lines = []
     i = 0
     for line in file_in:
@@ -100,8 +101,10 @@ for i in range(n_obj):
 B = determine_neighbor(W, T)                                        # determine neighbor
 X = init_pop(n_pop, n_var, xl, xu)                                  # initialize a population
 
-
-Y = eval_pop(X, problem)                                                  # evaluate fitness
+if (prob_name == "dtlz7"):
+    Y = eval_pop(X, problem)                                                  # evaluate fitness
+else:
+    Y = eval_all_solutions(X, problem)                                                  # evaluate fitness
 
 z = init_ref_point(Y)                                               # determine a reference point
 
@@ -147,7 +150,10 @@ while n_fe < n_eval:												# start main loop
             xi_ = fix_bound( de_mutation(xi, X, n_pop, i, F), xl, xu ) # differential evolution mutation
             xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu ) # polynomial mutation
             X[i] = xi_
-            fi_ = problem.evaluate(xi_)                                                # evaluate offspring
+            if (prob_name == "dtlz7"):
+                fi_ = problem.evaluate(xi_)                                                # evaluate offspring
+            else:
+                fi_ = problem(xi_)                                          # evaluate offspring
 
             z = update_ref_point(z, fi_)                                # update reference point
 

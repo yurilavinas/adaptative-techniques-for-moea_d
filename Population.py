@@ -40,3 +40,24 @@ def eval_pop(X, problem):
     F = []
     F= problem.evaluate(X)
     return np.array(F)
+
+
+def eval_all_solutions(X, f):
+    """
+    Evaluate a population with the given objectives
+    parameter
+    -----------
+    X: 2D-Array
+      population matrix where each row is an individual
+    f: method
+      objective function which returns fitness values of a input individual
+    
+    return
+    -----------
+    2D-Array
+      fitness value matrix where each row is the fitness values of an individual
+    """
+    F = []
+    for x in X:
+        F.append(f(x))
+    return np.array(F)

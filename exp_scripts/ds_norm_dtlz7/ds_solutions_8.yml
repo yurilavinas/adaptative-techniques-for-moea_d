@@ -1,0 +1,16 @@
+output: 'ds_8' 
+prob_name: 'dtlz7'
+n_obj: 2
+n_var: 100
+xl: 0
+xu: 1
+n_pop: 500
+n_eval: 10000000
+T: 100
+delta: 0.9
+nr: 2
+etam : 20
+priority_function: 'ds_norm'
+fix_value: 0.1
+F: 0.5
+number_solutions: 8
