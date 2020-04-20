@@ -11,7 +11,6 @@ from Population import init_pop, eval_pop
 from ReferencePoint import init_ref_point, update_ref_point
 from Mutation import lf_mutation, poly_mutation, fix_bound
 from Decomposition import tchebycheff
-from PriorityFunctions import fixed_priority_values
 
 
 ###################
@@ -54,9 +53,6 @@ alpha = params['alpha']                                             # set scalin
 beta = params['beta']                                               # set stability parameter of levy flight mutation
 etam = params['etam']                                               # set index parameter of polynomial mutation
 
-priority_function = params['priority_function']                     # name of the priority function for resource allocation
-fix_value = params['fix_value']                                     # set index parameter of priority functions for resource allocation
-
 #################
 # start program #
 #################
@@ -73,8 +69,6 @@ z = init_ref_point(Y)                                               # determine 
 
 n_fe = n_pop
 
-priority_values = fixed_priority_values(n_pop, priority_function, fix_value) # generate an array of values for resource allocation based on priority_function named function
-
 # for c_gen in range(1, n_gen):                                       # start main loop
 c_gen = 1
 while n_fe < n_eval:
@@ -86,38 +80,36 @@ while n_fe < n_eval:
 
     for i in np.random.permutation(n_pop):                          # traverse the population; randomly permuting solutions in the population set
 
-        if (priority_values[i] >= np.random.uniform()):
-            n_fe += 1
-            xi, fi = X[i, :], Y[i, :]                                   # get current individual and its fitness value
+        n_fe += 1
+        xi, fi = X[i, :], Y[i, :]                                   # get current individual and its fitness value
 
-            if random.random() < delta:                                 # determine selection pool by probability
-                pool = B[i, :]                                          # neighbor as the pool
-            else:
-                pool = np.arange(n_pop)                                 # population as the pool
+        if random.random() < delta:                                 # determine selection pool by probability
+            pool = B[i, :]                                          # neighbor as the pool
+        else:
+            pool = np.arange(n_pop)                                 # population as the pool
 
-            j = np.random.choice(pool)                                  # select a random individual from pool
-            xj, fj = X[j, :], Y[j, :]
+        j = np.random.choice(pool)                                  # select a random individual from pool
+        xj, fj = X[j, :], Y[j, :]
 
-            xi_ = fix_bound( lf_mutation(xi, xj, alpha, beta), xl, xu ) # levy flight mutation
-            xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu ) # polynomial mutation
-            fi_ = problem(xi_)                                                # evaluate offspring
+        xi_ = fix_bound( lf_mutation(xi, xj, alpha, beta), xl, xu ) # levy flight mutation
+        xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu ) # polynomial mutation
+        fi_ = problem(xi_)                                                # evaluate offspring
 
-            z = update_ref_point(z, fi_)                                # update reference point
+        z = update_ref_point(z, fi_)                                # update reference point
 
-            nc = 0                                                      # initialize the update counter
-            for k in np.random.permutation(len(pool)):                  # traverse the selection pool
+        nc = 0                                                      # initialize the update counter
+        for k in np.random.permutation(len(pool)):                  # traverse the selection pool
 
-                fk = Y[k, :]                                            # get k-th individual fitness
-                wk = W[k, :]                                            # get k-th weight vector
+            fk = Y[k, :]                                            # get k-th individual fitness
+            wk = W[k, :]                                            # get k-th weight vector
 
-                if tchebycheff(fi_, wk, z) <= tchebycheff(fk, wk, z):   # compare tchebycheff cost of offspring and parent
-                    X[k] = xi_                                          # update parent
-                    Y[k] = fi_
-                    nc += 1                                             # cumulate the counter
+            if tchebycheff(fi_, wk, z) <= tchebycheff(fk, wk, z):   # compare tchebycheff cost of offspring and parent
+                X[k] = xi_                                          # update parent
+                Y[k] = fi_
+                nc += 1                                             # cumulate the counter
 
-                if nc >= nr: break                                      # break if counter arrive the upper limit
+            if nc >= nr: break                                      # break if counter arrive the upper limit
     c_gen += 1
-    priority_values = fixed_priority_values(n_pop, priority_function, fix_value)
 
 result = np.hstack([Y, X])                                          # record objective values and decision variables
 
