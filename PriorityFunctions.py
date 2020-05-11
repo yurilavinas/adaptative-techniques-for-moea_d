@@ -1,6 +1,6 @@
 import numpy as np
 
-def fixed_priority_values(n_pop, function, value = 0.1):
+def priority_values(n_pop, function, value = 0.1):
     """
     Initialize a population with uniform distribution
 
@@ -17,11 +17,11 @@ def fixed_priority_values(n_pop, function, value = 0.1):
     1D-Array
       an array of fixed values for resource allocation
     """
-    if(function == "fix_random"):
-        X = fix_random(n_pop, value)
+    if function == "partial_update":
+        X = partial_update(n_pop, value)
     return X
 
-def fix_random(n_pop, value = 0.1):
+def partial_update(n_pop, value = 0.1):
     """
     Initialize a population with uniform distribution
 

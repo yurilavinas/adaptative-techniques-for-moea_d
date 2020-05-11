@@ -2,6 +2,22 @@ import random
 import numpy as np
 from math import gamma as G
 
+def perform_mutation(mutation_name, xi_, xj, params):
+    
+    xl = params['xl']                                                               # set boundary of variables
+    xu = params['xu']                                                               # set boundary of variables
+
+    if mutation_name == 'levyflight_mutation':
+        alpha = params['alpha']                                                         # set scaling factor of levy flight mutation
+        beta = params['beta']                                                           # set ??? of levy flight mutation
+        xi_ = fix_bound( lf_mutation(xi_, xj, alpha, beta), xl, xu )         # levy flight mutation
+    
+    elif mutation_name == 'polynomial_mutation':
+        etam = params['etam']                                                           # set index parameter of polynomial mutation
+        xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu )         # polynomial mutation
+
+    return xi_
+
 def poly_mutation(x, eta_m, xl, xu):
     """
     Implement polynomial mutation

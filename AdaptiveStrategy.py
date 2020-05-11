@@ -24,7 +24,7 @@ def evolve(P, P_parent, P_offspring, I, I_parent, I_offspring, B,
         P_offspring = P[:]
         I_offspring = I[:]
         for i in np.random.permutation(n_pop):
-            j = np.random.choice(B[i])
+            j = int(np.random.choice(B[i]))
             pi_ = P_offspring[i]
             Ii_ = I_offspring[i]
             pj = P_parent[j]
