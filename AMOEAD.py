@@ -68,8 +68,8 @@ mutation_list = params['mutation_list']
 #######################
 # set MOP for solving #
 #######################
-prob_name = params['prob_name']                                                 # set optimization problem                                               # set optimization problem
-problem = set_problem(prob_name, n_var, n_obj, xu, xl)                          # set optimization problem                                               # set optimization problem
+prob_name = params['prob_name']                                                 # set optimization problem
+problem = set_problem(prob_name, n_var, n_obj, xu, xl)                          # set optimization problem
 
 ###############################
 # define MOEA/D configuration #

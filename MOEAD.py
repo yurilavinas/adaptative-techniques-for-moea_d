@@ -43,14 +43,7 @@ xl = params['xl']                                                               
 xu = params['xu']                                                               # set boundary of variables
 
 prob_name = params['prob_name']
-if (prob_name == "dtlz7"): 
-    problem = get_problem(prob_name)                                            # set optimization problem
-    problem.n_var = n_var
-    problem.n_obj = n_obj
-    problem.xu = np.repeat(xu, n_var)
-    problem.xl = np.repeat(xl, n_var)
-else:
-    problem = set_problem(prob_name) 
+problem = set_problem(prob_name, n_var, n_obj, xu, xl)                          # set optimization problem                                               
 
 sld_n_part = params['sld_n_part']                                           # set number of partitions
 
@@ -109,10 +102,8 @@ while n_fe < n_eval:
 
         xi_ = fix_bound( lf_mutation(xi, xj, alpha, beta), xl, xu ) # levy flight mutation
         xi_ = fix_bound( poly_mutation(xi_, etam, xl, xu), xl, xu ) # polynomial mutation
-        if (prob_name == "dtlz7"):
-            fi_ = problem.evaluate(xi_)                                     # evaluate offspring (new solution)                                              
-        else:
-            fi_ = problem(xi_)                                                # evaluate offspring
+        
+        fi_ = problem(xi_)                                              # evaluate offspring (new solution)
 
         z = update_ref_point(z, fi_)                                # update reference point
 

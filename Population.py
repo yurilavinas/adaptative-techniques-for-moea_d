@@ -37,10 +37,11 @@ def eval_pop(X, problem, problem_name):
       fitness value matrix where each row is the fitness values of an individual
     """
     # F = []]
+    benchmark_name = ''.join(i for i in problem_name if not i.isdigit())
 
-    if (problem_name == "dtlz7"):
+    if (benchmark_name == "dtlz" or benchmark_name == "DTLZ"):
         F = problem(X)
-    elif (problem_name == "uf9"):
+    elif (benchmark_name == "uf" or benchmark_name == "UF"):
         F = []
         for x in X:
             F.append(problem(x))
