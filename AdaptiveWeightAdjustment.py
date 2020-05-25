@@ -3,24 +3,23 @@ from sklearn.neighbors import NearestNeighbors
 from WeightVector import determine_neighbor
 
 
-def perform_awa(c_gen, W, X, Y, B, EP, ref_point, params):
+def weight_adjustment(c_gen, W, X, Y, B, EP, ref_point, params):
 
-    if params['perform_awa'] ==  'True':
-        n_eval = params['n_eval']
-        wag = params['wag']                                                             # set the iteration intervals of utilizing the adaptive weight vector adjustment strategy 
-        rate_evol = params['rate_evol']                                                 # If set this param 0.8,  first 80% generation normal MOEA/D, rest 20% weight adjustment
-        rate_update_weight = params['rate_update_weight']                               # If set this param 0.05, 5% of weight are updated
-        ps_value = params['ps_value']                                                   # set index parameter of priority functions for resource allocation
-        n_obj = params['n_obj']                                                         # set number of objectives
-        T = params['T']                                                                 # set neighbor size
+    n_eval = params['n_eval']
+    wag = params['wag']                                                             # set the iteration intervals of utilizing the adaptive weight vector adjustment strategy 
+    rate_evol = params['rate_evol']                                                 # If set this param 0.8,  first 80% generation normal MOEA/D, rest 20% weight adjustment
+    rate_update_weight = params['rate_update_weight']                               # If set this param 0.05, 5% of weight are updated
+    ps_value = params['ps_value']                                                   # set index parameter of priority functions for resource allocation
+    n_obj = params['n_obj']                                                         # set number of objectives
+    T = params['T']                                                                 # set neighbor size
 
-        G_max = int((n_eval/len(W))/ps_value)                                            # approximated max generation
+    G_max = int((n_eval/len(W))/ps_value)                                            # approximated max generation
 
-        if c_gen>=rate_evol*G_max and c_gen % wag == 0:                             # If satisfy this fomula, start AWA      
-            nus = int(min(len(EP),rate_update_weight*len(Y)))                       # number of update subproblem
-            X, Y, W = delete_vector(X, Y, W, n_obj, nus)                            # delete vector
-            X, Y, W = add_vector(EP, X, Y, W, ref_point, nus)                       # dd vector
-            B = determine_neighbor(W, T)                                            # re-compute neighbor
+    if c_gen>=rate_evol*G_max and c_gen % wag == 0:                             # If satisfy this fomula, start AWA      
+        nus = int(min(len(EP),rate_update_weight*len(Y)))                       # number of update subproblem
+        X, Y, W = delete_vector(X, Y, W, n_obj, nus)                            # delete vector
+        X, Y, W = add_vector(EP, X, Y, W, ref_point, nus)                       # dd vector
+        B = determine_neighbor(W, T)                                            # re-compute neighbor
         
     return (X, Y, W, B)
 

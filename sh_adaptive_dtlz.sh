@@ -1,3 +1,8 @@
+ for i in {0..10} ; do
+     python3 AMOEAD.py exp_scripts_adaptive/DTLZ7_adaptive.yml ${i}
+ done
+
+
 for i in {0..10} ; do
     python3 AMOEAD.py exp_scripts_adaptive/DTLZ1_adaptive.yml ${i}
 done
@@ -19,9 +24,6 @@ for i in {0..10} ; do
 done
 
 for i in {0..10} ; do
-    python3 AMOEAD.py exp_scripts_adaptive/DTLZ6_adaptive.yml ${i}
+   python3 AMOEAD.py exp_scripts_adaptive/DTLZ6_adaptive.yml ${i}
 done
 
-for i in {0..10} ; do
-    python3 AMOEAD.py exp_scripts_adaptive/DTLZ7_adaptive.yml ${i}
-done

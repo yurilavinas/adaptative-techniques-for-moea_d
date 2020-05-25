@@ -1,15 +1,33 @@
-output: '../../../Volumes/HD-PNFU3/temp_exp/no_adaptation/' 
+output: '../../../Volumes/HD-PNFU3/temp_exp/no_adaptation' 
 prob_name: 'dtlz1'
 n_obj: 2
 n_var: 100
 xl: 0
-xu: 1
+xu: 2
+decomp_method: 'sld'
 sld_n_part: 249
+agg_function: 'wt'
+update: 'restricted'
 n_eval: 30000
 T: 100
-sigma: 0.9
-nr: 2
-alpha: 1.e-05
-beta: 0.3
-etam: 20
 delta: 0.9
+nr: 2
+mutation_list:
+  - 'levyflight_mutation'
+  - 'polynomial_mutation'
+alpha : 1.e-05
+betal : 0.1
+betau : 1.9
+etam : 20
+perform_SA: 'False'
+alpha for param : 0.1
+beta for param : 1.0
+n_step : 20
+wag : 120
+rate_evol : 0.3
+rate_update_weight : 0.05
+priority_function: 'partial_update'
+ps_value: 1
+WS_transform: 'False'
+perform_awa: 'False'
+save_data: 'True'

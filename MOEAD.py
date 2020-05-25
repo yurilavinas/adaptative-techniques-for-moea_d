@@ -16,7 +16,7 @@ from Decomposition import tchebycheff
 #  MOP to solve   #
 ###################
 from pymoo.factory import get_problem
-from platypus.problems import UF9
+# from platypus.problems import UF9
 ###################
 # parse arguments #
 ###################

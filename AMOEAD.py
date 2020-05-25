@@ -12,11 +12,11 @@ from Factory import set_problem
 from WeightVector import get_weights, determine_neighbor
 from Population import init_pop, eval_pop
 from ReferencePoint import init_ref_point, update_ref_point
-from Mutation import perform_mutation
-from Decomposition import agg_value
+from Mutation import perform_mutation, lf_mutation, poly_mutation, fix_bound
+from Decomposition import agg_value, tchebycheff
 from PriorityFunctions import priority_values
 from AdaptiveStrategy import evolve
-from AdaptiveWeightAdjustment import perform_awa, update_EP, init_EP
+from AdaptiveWeightAdjustment import weight_adjustment, update_EP, init_EP
 from SelectMethods import select_solutions
 from UpdateMethods import update
 
@@ -58,6 +58,8 @@ decomp_method = params['decomp_method']                                         
 agg_function = params['agg_function']                                            # set scalar aggregation fuction method
 
 update_name = params['update']                                            # set update method 
+if update_name == "standard":
+    nr = INF
 
 n_eval = params['n_eval']                                                       # set maximum number of evaluation
 
@@ -87,9 +89,12 @@ Y = eval_pop(X, problem, prob_name)                                             
 ref_point = init_ref_point(Y)                                                           # determine a reference point
 EP = init_EP(X, Y, n_pop, n_obj)                                                #initialize External population
 
-# P = np.zeros(n_pop) + beta                                                      # generate a set of stability beta parameters 
-P = np.random.uniform(params['betal'],params['betau'], n_pop)                                      # generate a set of stability parameters
+beta = 0.3
+P = np.zeros(n_pop) + beta                                                      # generate a set of stability beta parameters 
+# P = np.random.uniform(params['betal'],params['betau'], n_pop)                                      # generate a set of stability parameters
 nr = params['nr']
+
+delta = params['delta']
 
 ##################################
 # set self adaptive parameters #
@@ -114,6 +119,9 @@ priority_function = params['priority_function']                                 
 ps_value = params['ps_value']                                                   # set index parameter of priority functions for resource allocation
 priority_values = priority_values(n_pop, priority_function, ps_value)           # generate an array of values for resource allocation based on priority_function named function
 
+
+perform_awa = params['perform_awa']                                            
+perform_SA = params['perform_SA']                                            
 ################
 # start MOEA/D #
 ################
@@ -129,46 +137,60 @@ while n_fe < n_eval:                                                            
         info_gen = np.hstack([n_fe, c_gen])                                         # record number of function evaluations and current generation
         np.savetxt(f'./{output}/history/{prob_name}_{args.seed}/{c_gen}_info_gen.csv', info_gen)# record information (n_fe and c_gen) about the current generation
 
-    pv_count = 0
     for i in np.random.permutation(n_pop):                                      # traverse the population; randomly permuting solutions in the population set
-
         if priority_values[i] >= np.random.uniform():                         # Priority values decide if a solution is candidate for change at an iteration. 
-            pv_count += 1                                                                # Solutions canditate for update are the ones with priority values bigger than a random value
-            n_fe += 1                                                           # adding 1 to the number of solutions evaluated
-            xi_, yi = X[i, :], Y[i, :]                                           # get current individual and its fitness value
             
-            j, xj, yj, pool = select_solutions(i, X, Y, B, params)
-           
-            params['beta'] = P[i]                                                        # self-adaptive beta parameters: set of beta parameters for each subproblem 
+            n_fe += 1
+            xi_, fi = X[i, :], Y[i, :]                                   # get current individual and its fitness value
+
+            if random.random() < delta:                                 # determine selection pool by probability
+                pool = B[i, :]                                          # neighbor as the pool
+            else:
+                pool = np.arange(n_pop)                                 # population as the pool
+
+            j = int(np.random.choice(pool))                                  # select a random individual from pool
+            xj, fj = X[j, :], Y[j, :]
+
+
+            params['beta'] = P[i]                                       # self-adaptive beta parameters: set of beta parameters for each subproblem 
             for mutation in mutation_list:
-                xi_ = perform_mutation(mutation, xi_, xj, params)             # levy flight mutation
+                xi_ = perform_mutation(mutation, xi_, xj, params)             # perform mutations
             
-            yi_ = problem(xi_)                                              # evaluate offspring (new solution)                                              
+            fi_ = problem(xi_)                                              # evaluate offspring (new solution)
+            
+            if perform_awa == 'True':
+                EP = update_EP(EP, np.array([fi_,xi_]), n_pop, n_obj)               # update External population
 
-            EP = update_EP(EP, np.array([yi_,xi_]), n_pop, n_obj)               # update External population
+            ref_point = update_ref_point(ref_point, fi_)                                # update reference point
 
-            ref_point = update_ref_point(ref_point, yi_)                                        # update reference point
+            nc = 0                                                      # initialize the update counter
+            for k in np.random.permutation(len(pool)):                  # traverse the selection pool
 
-            nc = 0                                                              # initialize the update counter
-            for k in np.random.permutation(len(pool)):                          # traverse the selection pool
+                fk = Y[k, :]                                            # get k-th individual fitness
+                wk = W[k, :]                                            # get k-th weight vector
 
-                yk = Y[k, :]                                                    # get k-th individual fitness
-                wk = W[k, :]                                                    # get k-th weight vector
+                value_i = agg_value(agg_function, fi_, wk, ref_point)              # compute scalar aggregation value cost of offspring
+                value_k = agg_value(agg_function, fk, wk, ref_point)               # compute scalar aggregation value cost of offspring
 
-                tch_ = agg_value(agg_function, yi_, wk, ref_point)              # compute scalar aggregation value cost of offspring
-                tchk = agg_value(agg_function, yk, wk, ref_point)               # compute scalar aggregation value cost of offspring
+                
+                if value_i <= value_k:   # compare tchebycheff cost of offspring and parent
 
-                nc, X, Y, I = update(update_name, tch_, tchk, nc, X, Y, I)
-                if nc >= nr: break
+                    X[k] = xi_                                          # update parent
+                    Y[k] = fi_
+                    nc += 1 
 
-    X, Y, W, B = perform_awa(c_gen, W, X, Y, B, EP, ref_point, params)
+                if nc >= nr: break                                      # break if counter arrive the upper limit
+
+    if perform_awa == 'True':
+        X, Y, W, B = weight_adjustment(c_gen, W, X, Y, B, EP, ref_point, params)
 
     c_gen += 1                                                                   # end of current iteration (generation), add 1
-
-    P, P_parent, P_offspring, I, I_parent, I_offspring = \
-        evolve(P, P_parent, P_offspring, I, I_parent, I_offspring,
-               B, c_gen, n_step,
-               betal, betau, alpha_for_param, beta_for_param)                   # evolve the stability parameters for adaption of levy flight parameters
+    
+    if perform_SA == 'True':
+        P, P_parent, P_offspring, I, I_parent, I_offspring = \
+            evolve(P, P_parent, P_offspring, I, I_parent, I_offspring,
+                   B, c_gen, n_step,
+                   betal, betau, alpha_for_param, beta_for_param)                   # evolve the stability parameters for adaption of levy flight parameters
 
     
 ################
