@@ -7,9 +7,9 @@ def get_weights(decomp_method, params):
         sld_n_part = params['sld_n_part']                                               # set number of partitions
         n_obj = params['n_obj']                                                         # set number of objs
         W = das_dennis(sld_n_part, n_obj)
-    
+
     if params['WS_transform'] == "True":
-        W = WS_transform(W)                                                             # vectors are modified to use Tchebycheff efficiently
+        W = np.round(WS_transform(W), 5)                                                             # vectors are modified to use Tchebycheff efficiently
     
     return W
 

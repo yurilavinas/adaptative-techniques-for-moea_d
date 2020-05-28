@@ -41,5 +41,8 @@ def partial_update(n_pop, value = 0.1):
       an array of fixed values for resource allocation
     """
     X = np.full(n_pop, value)
+    
+    X[0] = 1
+    X[n_pop-1] = 1
 
     return X

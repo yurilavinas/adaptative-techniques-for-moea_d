@@ -12,7 +12,7 @@ from Factory import set_problem
 from WeightVector import get_weights, determine_neighbor
 from Population import init_pop, eval_pop
 from ReferencePoint import init_ref_point, update_ref_point
-from Mutation import perform_mutation, lf_mutation, poly_mutation, fix_bound
+from Mutation import perform_mutation, lf_mutation, poly_mutation, fix_bound, de_mutation
 from Decomposition import agg_value, tchebycheff
 from PriorityFunctions import priority_values
 from AdaptiveStrategy import evolve
@@ -79,6 +79,8 @@ problem = set_problem(prob_name, n_var, n_obj, xu, xl)                          
 W = get_weights(decomp_method, params)
 
 n_pop = len(W)
+
+params['n_pop'] = n_pop
 
 B = determine_neighbor(W, T)                                                    # determine neighbor
 
@@ -153,8 +155,9 @@ while n_fe < n_eval:                                                            
 
 
             params['beta'] = P[i]                                       # self-adaptive beta parameters: set of beta parameters for each subproblem 
+            params['i'] = i                                      
             for mutation in mutation_list:
-                xi_ = perform_mutation(mutation, xi_, xj, params)             # perform mutations
+                xi_ = perform_mutation(mutation, xi_, xj, X, params)             # perform mutations
             
             fi_ = problem(xi_)                                              # evaluate offspring (new solution)
             
@@ -172,7 +175,6 @@ while n_fe < n_eval:                                                            
                 value_i = agg_value(agg_function, fi_, wk, ref_point)              # compute scalar aggregation value cost of offspring
                 value_k = agg_value(agg_function, fk, wk, ref_point)               # compute scalar aggregation value cost of offspring
 
-                
                 if value_i <= value_k:   # compare tchebycheff cost of offspring and parent
 
                     X[k] = xi_                                          # update parent

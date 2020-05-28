@@ -1,0 +1,33 @@
+output: '~/../../../Volumes' 
+prob_name: 'uf8'
+n_obj: 3
+n_var: 100
+xl: -2 # o primeiro e o segundo tem que ser zero
+xu: 2 # o primeiro e o segundo tem que ser um
+decomp_method: 'sld'
+sld_n_part: 25
+agg_function: 'wt'
+update: 'restricted'
+n_eval: 30000
+T: 100
+delta: 0.9
+nr: 2
+mutation_list:
+  - 'levyflight_mutation'
+  - 'polynomial_mutation'
+alpha : 1.e-05
+betal : 0.1
+betau : 1.9
+etam : 20
+perform_SA: 'True'
+alpha for param : 0.1
+beta for param : 1.0
+n_step : 10
+wag : 10
+rate_evol : 0.3
+rate_update_weight : 0.3
+priority_function: 'partial_update'
+ps_value: 0.1
+WS_transform: 'True'
+perform_awa: 'True'
+save_data: 'True'

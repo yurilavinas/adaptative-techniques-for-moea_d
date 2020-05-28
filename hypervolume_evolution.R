@@ -6,9 +6,11 @@ library(ggplot2)
 
 # names of algorithms in analysis
 names <- c("no_adaptation",
+	   "no_sa",
+	   "no_w",
            "adaptation")
 
-checkpoints <- (0:13) * 2400
+checkpoints <- (0:25) * 2400
 
 seed = 0
 repetitions = 10
@@ -18,7 +20,7 @@ repetitions = 10
 #   fun.names1[[length(fun.names1) + 1]] = paste0("UF", i)
 # }
 fun.names1 <- list()
-for (i in 6:7) {
+for (i in 1:7) {
   fun.names1[[length(fun.names1) + 1]] = paste0("DTLZ", i)
 }
 
@@ -210,14 +212,14 @@ for (fun in fun.names1) {
         element_text(size = 26)
     )  +
     labs(
-      title = "DTLZ7",
+      title = fun,
       x = "Number of Function Evalutions",
       y = "HV",
-      main = "DLTZ7"
+      main = fun
     )
   
   print(v)
-  filename = paste0("~/", fun , name, "hv_evolution.png")
+  filename = paste0("~/adaptation/", fun , name, "hv_evolution.png")
   ggsave(filename = filename,
          dpi = 600,
          width = 9)
@@ -234,7 +236,7 @@ for (fun in fun.names1) {
               )) +
     geom_boxplot(aes(color = strategy)) + theme_minimal()
   print(u)
-  filename = paste0("~/", fun , "hv_boxplot.png")
+  filename = paste0("~/adaptation/", fun , "hv_boxplot.png")
   ggsave(filename = filename,
          dpi = 600,
          width = 9)

@@ -43,9 +43,11 @@ xl = params['xl']                                                               
 xu = params['xu']                                                               # set boundary of variables
 
 prob_name = params['prob_name']
+sld_n_part = params['sld_n_part']
+
 problem = set_problem(prob_name, n_var, n_obj, xu, xl)                          # set optimization problem                                               
 
-sld_n_part = params['sld_n_part']                                           # set number of partitions
+                                           # set number of partitions
 
 n_eval = params['n_eval']                                           # set maximum number of evaluation
 n_pop = int( comb(n_obj + sld_n_part - 1, n_obj - 1) )                  # compute population size

@@ -3,11 +3,13 @@ import numpy as np
 ###################
 #  MOP to solve   #
 ###################
-from pymoo.factory import get_problem
+from pymoo.factory import get_problem, get_reference_directions, get_visualization
+from pymoo.util.plotting import plot
 
 def set_problem(prob_name, n_var = 0, n_obj = 0, xu = 0, xl = 0):
 
 	benchmark_name = ''.join(i for i in prob_name if not i.isdigit())
+
 	if benchmark_name == 'dtlz' or benchmark_name == 'DTLZ':
 		return (dtlz_benchmark(prob_name, n_var, n_obj, xu, xl))
 
@@ -22,11 +24,9 @@ def set_problem(prob_name, n_var = 0, n_obj = 0, xu = 0, xl = 0):
 
 def dtlz_benchmark(prob_name, n_var = 0, n_obj = 0, xu = 0, xl = 0):
 
-	problem = get_problem(prob_name)                                            # set optimization problem
+	problem = get_problem(prob_name, n_var, n_obj)                                            # set optimization problem
 	problem.n_var = n_var
 	problem.n_obj = n_obj
-	problem.xu = np.repeat(xu, n_var)
-	problem.xl = np.repeat(xl, n_var)
 
 	return problem.evaluate
 
